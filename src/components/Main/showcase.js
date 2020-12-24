@@ -5,6 +5,8 @@ import Tile from "./tile";
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
 const recents = {
     fontSize: "20px",
     fontWeight: "bold",
@@ -24,7 +26,7 @@ class ShowCase extends Component {
       "Content-Type": "application/json;charset=UTF-8",
     };
     await axios
-      .get(process.env.REACT_APP_base_url+"/api/article/list/" + pg, {
+      .get(REACT_APP_base_url+"/api/article/list/" + pg, {
         headers: headers,
       })
       .then((response) => {

@@ -1,5 +1,8 @@
 import { UPDATE_USER } from "./types";
 import axios from "axios";
+
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
 export const updateUser = (val) => (dispatch) => {
   const token = sessionStorage.getItem("medtoken");
   console.log("Updating user");
@@ -10,7 +13,7 @@ export const updateUser = (val) => (dispatch) => {
       "auth-token": token,
     };
     axios
-      .get(process.env.REACT_APP_base_url + "/api/p/profile", {
+      .get(REACT_APP_base_url + "/api/p/profile", {
         headers: headers,
       })
       .then((response) => {
@@ -32,7 +35,6 @@ export const updateUser = (val) => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  const token = sessionStorage.getItem("medtoken");
   sessionStorage.setItem("medtoken", null);
   console.log("Updating user");
   //if (token != null) {

@@ -16,25 +16,23 @@ function App() {
         <Navig />
         <Container>
             <Switch>
-            <Route exact path="/">
-                <Main/>
-            </Route>
-              <Route path="/auth">
+              <Route path="/medfrontend/auth">
               <Row className="justify-content-md-center">
                 <Auth />
                 </Row>
               </Route>
-              <Route path="/user">
+              <Route path="/medfrontend/user">
               <Row className="justify-content-md-center">
                 <User />
                 </Row>
               </Route>
-              
               <Route path="/post">
                 <Posts />
               </Route>
+              <Route path="/medfrontend/">
+                <Main/>
+            </Route>
             </Switch>
-          
         </Container>
       </Router>
     </Provider>

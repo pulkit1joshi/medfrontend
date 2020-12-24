@@ -3,6 +3,9 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 
+
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +65,7 @@ class Register extends Component {
 
     await axios
       .post(
-        process.env.base_url+"/api/user/register",
+        REACT_APP_base_url+"/api/user/register",
         data,
         {
           headers: headers,

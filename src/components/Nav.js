@@ -77,6 +77,7 @@ class Navig extends Component {
                 <img
                   src={this.props.imageUrl}
                   style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                  alt="Your profile pic"
                 ></img>
               }
               alignRight={true}
@@ -84,8 +85,14 @@ class Navig extends Component {
               flip
             >
               <NavDropdown.Item>
-                <Link to="/user/profile" style={option}>
+                <Link to={"/user/profile/"+this.props.userId} style={option}>
                   Welcome {this.props.userName}
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link to="/user/settings" style={option}>
+                  Settings
                 </Link>
               </NavDropdown.Item>
 
@@ -112,6 +119,7 @@ const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
   userName: state.user.userName,
   imageUrl: state.user.imageUrl,
+  userId: state.user.userId
 });
 
 export default connect(mapStateToProps, { updateUser, logoutUser })(Navig);

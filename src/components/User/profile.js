@@ -11,6 +11,8 @@ import { Redirect } from "react-router-dom";
 import Image from "react-bootstrap/Image"
 import "./profile.css"
 
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
 const style1 = {
   borderTopWidth: "0em",
   borderRightWidth: "0em",
@@ -35,7 +37,7 @@ class Profile extends Component {
       toggleemail: true,
       togglename: true,
       show_input: false,
-      isLogged: false,
+      isLogged: true,
       firstname: "",
       lastname: "",
       username: "",
@@ -52,6 +54,7 @@ class Profile extends Component {
       passtext: "",
       succtext: ""
     };
+    console.log(props.isLogged);
     const token = sessionStorage.getItem("medtoken");
     if (token != null) {
       const headers = {
@@ -63,6 +66,10 @@ class Profile extends Component {
           headers: headers,
         })
         .then((response) => {
+          if(response.data.error)
+          {
+            return this.setState({errortext: response.data.error.msg});
+          }
           const prof = response.data.user;
           console.log(response.data);
           let gender = "male";
@@ -169,7 +176,7 @@ class Profile extends Component {
 
     await axios
       .post(
-        process.env.REACT_APP_base_url+"/api/p/profile",
+        REACT_APP_base_url+"/api/p/profile",
         data,
         {
           headers: headers,
@@ -577,7 +584,7 @@ class Profile extends Component {
       </Container>
     );
     }
-    else return <Redirect to={"/auth/login"}/>
+    else return <Redirect to={"/medfrontend/auth/login"}/>
           
   }
 }

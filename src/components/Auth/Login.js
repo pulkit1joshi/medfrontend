@@ -5,6 +5,9 @@ import Form from "react-bootstrap/Form";
 import { updateUser } from '../../actions/userAction'
 import { connect } from "react-redux";
 
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +43,7 @@ class Login extends Component {
 
     axios
       .post(
-        process.env.REACT_APP_base_url+"/api/user/login",
+        REACT_APP_base_url+"/api/user/login",
         data,
         {
           headers: headers,

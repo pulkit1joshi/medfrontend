@@ -9,10 +9,10 @@ export default class Posts extends Component {
       <React.Fragment>
        
        <Switch>
-          <Route path="/post/new">
+          <Route path="/medfrontend/post/new">
              <Editor />
           </Route>
-          <Route path="/post/:id" component={Article}>
+          <Route path="/medfrontend/post/:id" component={Article}>
           </Route>
           </Switch>
         

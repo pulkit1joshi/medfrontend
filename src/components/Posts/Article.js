@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import "./image.css";
 
+
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
+
 const clapicon =
   "https://miro.medium.com/max/2400/1*9M0oeCEgOsovOMz2snw5iw.png";
 
@@ -94,7 +97,7 @@ class Article extends Component {
       "Content-Type": "application/json;charset=UTF-8",
     };
     await axios
-      .get(process.env.REACT_APP_base_url+"/api/article/" + this.props.match.params.id, {
+      .get(REACT_APP_base_url+"/api/article/" + this.props.match.params.id, {
         headers: headers,
       })
       .then((response) => {
@@ -111,14 +114,14 @@ class Article extends Component {
            pname=response.data.writer.firstname;
            pdesc= response.data.prof.about;
            pid = response.data.article.writerid;
-           plink = "/profile/"+pid;
+           plink = "/medfrontend/profile/"+pid;
          }
          else
          {
            pname=response.data.publication.name;
            pdesc=response.data.publication.description;
            pid = response.data.publication.pid;
-           plink = "publication"+pid;
+           plink = "/medfrontend/publication/"+pid;
          }
          /*let clappable=true;
          if(this.state.userId === response.data.article.writerid)
@@ -168,7 +171,7 @@ class Article extends Component {
             {" "}
           </Col>
         </Row>
-        <Row style={{ paddingBottom: "0.1em" }}>
+        <Row style={{ paddingBottom: "1em" }}>
           <Col xs={0} md={0} lg={2}></Col>
           <Col xs={11} md={11} lg={7}>
             <Row style={style2}>
@@ -191,7 +194,7 @@ class Article extends Component {
                     ></Image>
                   </Col>
                   <Col xs={10} md={8} lg={8}>
-                    <Link to={'/profile/'+this.state.writerid} style={{color: "black"}}>{this.state.name}</Link> <br />
+                    <Link to={'/medfrontend/profile/'+this.state.writerid} style={{color: "black"}}>{this.state.name}</Link> <br />
                     <p style={date}>{this.state.date}</p>
                   </Col>
                 </Row>
