@@ -47,12 +47,12 @@ class Navig extends Component {
           <Navbar.Toggle />
           <Nav className="ml-auto">
             <Nav.Item className="ml-auto" bsPrefix="nav-link">
-              <Link exact to="/auth/login" style={option}>
+              <Link exact to="/medfrontend/auth/login" style={option}>
                 Login
               </Link>
             </Nav.Item>
             <Nav.Item className="ml-auto" bsPrefix="nav-link">
-              <Link exact to="/auth/register" style={option}>
+              <Link exact to="/medfrontend/auth/register" style={option}>
                 Register
               </Link>
             </Nav.Item>
@@ -63,7 +63,7 @@ class Navig extends Component {
       return (
         <Navbar bg="light" variant="light">
           <Navbar.Brand>
-            <Link to="/" style={{ color: "black" }}>
+            <Link to="/medfrontend/" style={{ color: "black" }}>
               Med-book
             </Link>
           </Navbar.Brand>
@@ -85,19 +85,19 @@ class Navig extends Component {
               flip
             >
               <NavDropdown.Item>
-                <Link to={"/user/profile/"+this.props.userId} style={option}>
+                <Link to={"/medfrontend/user/profile/"+this.props.userId} style={option}>
                   Welcome {this.props.userName}
                 </Link>
               </NavDropdown.Item>
 
               <NavDropdown.Item>
-                <Link to="/user/settings" style={option}>
+                <Link to="/medfrontend/user/settings" style={option}>
                   Settings
                 </Link>
               </NavDropdown.Item>
 
               <NavDropdown.Item>
-                <Link to="/post/new" style={option}>
+                <Link to="/medfrontend/post/new" style={option}>
                   New Post
                 </Link>
               </NavDropdown.Item>

@@ -26,10 +26,10 @@ function App() {
                 <User />
                 </Row>
               </Route>
-              <Route path="/post">
+              <Route path="/medfrontend/post">
                 <Posts />
               </Route>
-              <Route path="/medfrontend/">
+              <Route exact path="/medfrontend/">
                 <Main/>
             </Route>
             </Switch>
