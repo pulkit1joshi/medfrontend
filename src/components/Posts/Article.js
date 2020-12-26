@@ -182,14 +182,7 @@ class Article extends Component {
         </Box>
 
         <Box style={{ paddingBottom: "1em" }}>
-          <Grid
-            container
-            direction="row"
-            xs={0}
-            md={0}
-            lg={3}
-            display={{ xs: "none", md: "none", lg: "block" }}
-          ></Grid>
+          
           <Grid item xs={11} md={11} lg={7}>
             <Grid
               container
@@ -227,7 +220,7 @@ class Article extends Component {
           </Grid>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} display={{xs: "none", md:"none", lg:"block"}}>
           <Grid item lg={2}>
             <Grid direction="column" style={{ position: "fixed" }}>
               <Grid item style={{ marginBottom: "2em" }} lg={2}>
