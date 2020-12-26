@@ -1,6 +1,6 @@
 import Auth from "./components/Auth"
 import Navig from "./components/Nav";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import store from "./store";
