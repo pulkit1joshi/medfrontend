@@ -32,7 +32,6 @@ export default class Tile extends Component {
   }
   render() {
     return (
-        <div>
         <Card style={{margin: "1em"}}>
         <Card.Img variant="top" src={this.props.data.imageUrl} style={imagestyle} alt="Image" className="cardimg"/>
         <Card.Body>
@@ -47,36 +46,7 @@ export default class Tile extends Component {
           <small className="text-muted">{this.state.date}</small>
         </Card.Footer>
       </Card>
-      
-      {/*<Row style={tilestyle} noGutters={true}>
-        <Col xs={11} lg={9} md={9} style={{padding: "1em"}}>
-          <Row>
-            <Col>
-              <Link to={"/post/" + this.props.data._id} style={head}>
-                {this.props.data.title}
-              </Link>
-            </Col>
-          </Row>
-          <Row style={description}>
-            <Col>{this.props.data.description}</Col>
-          </Row>
-          <Row>
-            <Col style={date}>{this.state.date}</Col>
-          </Row>
-        </Col>
-        <Col xs={1} lg={3} md={3} style={{padding: "0.1em"}}>
-          <img
-              width={150}
-              height={150}
-              alt={this.props.data.title}
-              src={
-                  this.props.data.imageUrl
-              }
-            />
-          
-        </Col>
-            </Row>*/}
-            </div>
+
     );
   }
 }

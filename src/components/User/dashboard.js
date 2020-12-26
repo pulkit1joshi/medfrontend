@@ -1,40 +1,45 @@
 import React, { Component } from "react";
 //import Button from 'react-bootstrap/Button';
 import axios from "axios";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Grid, Box, Divider, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import Image from "react-bootstrap/Image";
 import "./profile.css";
+import Card2 from "../Main/bigcard";
+
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com";
 
-const style1 = {
-  borderTopWidth: "0em",
-  borderRightWidth: "0em",
-  borderLeftWidth: "0em",
-  boxShadow: "none",
-  borderRadius: "1px",
-  padding: "0.1em",
-  backgroundColor: "white",
-};
-
 const head = {
-  padding: "1.0em",
-  fontSize: "40px",
+  paddingTop: "1.0em",
+  fontSize: "64px",
   fontWeight: "bold",
-  fontFamily:
-    "font-family: sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+  textAlign: "center",
+  fontFamily:"font-family: sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif",
 };
 
 const head2 = {
+  marginBottom: "3em",
   color: "gray",
+  textAlign: "center",
   fontFamily: 'sohne, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontSize: "17px",
+};
+
+const details = {
+  color: "gray",
+  fontFamily: 'sohne, "Helvetica Neue", Helvetica, Arial, sans-serif',
+  fontSize: "14px",
+};
+
+const img = {
+  borderRadius:"50%",
+  margin: "auto",
+  display: "block",
+  maxWidth: "100%",
+  maxHeight: "100%",
+  height: "130px",
+  width: "130px",
 };
 
 class Dashboard extends Component {
@@ -61,7 +66,7 @@ class Dashboard extends Component {
       gender: "",
       interests: "",
       followers: "",
-      posts: "",
+      posts: [],
       publications: "",
       img: "",
       errortext: "",
@@ -84,9 +89,8 @@ class Dashboard extends Component {
         }
       )
       .then((response) => {
-        if(response.data.error)
-        {
-          return this.setState({errortext: response.data.error.msg});
+        if (response.data.error) {
+          return this.setState({ errortext: response.data.error.msg });
         }
         const prof = response.data.user;
         console.log(response.data);
@@ -103,33 +107,82 @@ class Dashboard extends Component {
           gender: gender,
           interests: prof.interests,
           followers: prof.followerids,
-          posts: prof.postids,
           publications: prof.publicationids,
           img: prof.image,
           errortext: "",
           followerscount: response.data.user.followerids.length,
         });
       });
+
+    await axios
+      .get(
+        REACT_APP_base_url + "/api/article/user/" + this.props.match.params.id,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        this.setState({ posts: response.data.articles });
+      });
   }
 
   render() {
     return (
       <React.Fragment>
-          <Row className="d-lg-block">
-            <Row style={head} className="justify-content-md-center headt" fluid>
-              {this.state.firstname} {this.state.lastname}
-            </Row>
-            <Row style={head2} className="justify-content-md-center headt" fluid>
-              {this.state.followerscount} Followers
-            </Row>
-            <hr />
-        </Row>
-        
-        <Row>
-          <Col xs={1} md={2} lg={2}>
-           
-          </Col>
-        </Row>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <p style={head}>
+            {" "}
+            {this.state.firstname} {this.state.lastname}
+          </p>
+        </Grid>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <p style={head2}> {this.state.followerscount} Followers </p>
+          
+        </Grid>
+        <Divider style={{width:"100%"}}/>
+        <Grid container justify="space-between">
+          <Grid container justify="space-between" lg={2} style={{marginTop: "2em"}}>
+          <Box display={{ xs: "none", md: "none", lg: "block" }}>
+            <Grid direction="column" style={{ position: "fixed" }} >
+              <Grid item style={{ marginBottom: "2em" }} lg={3}>
+                <ButtonBase style={img}>
+                  <img
+                    style={img}
+                    alt="Writers profile pic"
+                    src={this.state.img}
+                  />
+                </ButtonBase>
+              </Grid>
+
+              <Grid item alignItems="flex-start" lg={3}>
+                <p style={details}> ABOUT </p>
+              </Grid>
+              <Grid item alignItems="flex-start" lg={3}>
+                <p style={{ fontWeight: "bold", fontSize: "16px" }}>
+                  {" "}
+                  {this.state.firstname} {this.state.lastname}
+                </p>
+              </Grid>
+              <Grid item alignItems="flex-start" lg={3}>
+                <Typography style={details}> {this.state.bio} </Typography>
+              </Grid>
+            </Grid>
+            </Box>
+          </Grid>
+        <Grid
+          container
+          justify="space-between"
+          lg={9}
+          xs={12}
+          md={12}
+        >
+          {this.state.posts && this.state.posts.map((post) => {
+            return <Card2 data={post} />;
+          })}
+        </Grid>
+</Grid>
+        <hr />
       </React.Fragment>
     );
   }

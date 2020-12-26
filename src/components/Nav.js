@@ -40,7 +40,7 @@ class Navig extends Component {
       return (
         <Navbar expand="lg" bg="light" variant="light">
           <Navbar.Brand>
-            <Link to="/" style={{ color: "black" }}>
+            <Link to="/medfrontend/" style={{ color: "black" }}>
               Med-book
             </Link>
           </Navbar.Brand>

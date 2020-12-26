@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import Tile from "./tile";
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
+import Card from "./card";
+import { Grid } from "@material-ui/core"
 
 const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
 
 const recents = {
     fontSize: "20px",
     fontWeight: "bold",
+    textAlign: "center"
 }
 
 class ShowCase extends Component {
@@ -40,14 +40,13 @@ class ShowCase extends Component {
   render() {
     return (
       <div>
-        <Col xs={1} md={1} lg={2}></Col>
-        <Col xs={11} md={11} lg={8} style={{margin: "0em", padding:"0em"}} fluid>
-        <Row className="justify-content-md-center" style={recents}>Recents</Row>
+        <Grid style={recents} justify="center" alignItems="center">Recents</Grid>
+        <Grid>
           {this.state.posts.map((post) => {
             console.log(post.title);
-            return <Tile data={post} />;
+            return <Card data={post} />;
           })}
-        </Col>
+          </Grid>
       </div>
     );
   }
