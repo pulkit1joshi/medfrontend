@@ -8,12 +8,12 @@ export default class Auth extends Component {
     return (
       <React.Fragment>
         <Switch>
-          <Route path="/auth/login">
+          <Route path="/medfrontend/auth/login">
           <Col>
             <Login />
             </Col>
           </Route>
-          <Route path="/auth/register">
+          <Route path="/medfrontend/auth/register">
           <Col>
             <Register /></Col>
           </Route>

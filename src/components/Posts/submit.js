@@ -5,7 +5,8 @@ import React, { Component } from "react";
 import { updateUser } from '../../actions/userAction'
 import { connect } from "react-redux";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col";
@@ -13,6 +14,8 @@ import Row from "react-bootstrap/Row";
 import axios from "axios"
 import { Redirect } from "react-router-dom";
 const isImageUrl = require('is-image-url');
+
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
 
 const style1 = {
   borderTopWidth: "0em",
@@ -124,7 +127,7 @@ class Editor2 extends Component {
 
     await axios
       .post(
-        process.env.REACT_APP_base_url+"/api/article/create",
+        REACT_APP_base_url+"/api/article/create",
         data,
         {
           headers: headers,
@@ -132,9 +135,10 @@ class Editor2 extends Component {
       )
 
       .then((response) => {
-        if (response.data.error) {
-          console.log(response);
-          //this.setState({ errortext: response.data.msg });
+        if(response.data.error)
+        {
+          console.log("ERROR");
+          return this.setState({errortext: response.data.msg});
         } else {
           console.log(response);
           this.setState({ succtext: "Updated", errortext: "" });
@@ -188,7 +192,7 @@ class Editor2 extends Component {
           <div style={style1}>
           <CKEditor
           
-          editor={Editor}
+          editor={ClassicEditor}
           data={this.state.text}
           
           config={{    
@@ -230,7 +234,7 @@ class Editor2 extends Component {
         
       );
     } else {
-      return <Redirect to="/auth/login" />
+      return <Redirect to="/medfrontend/auth/login" />
     }
   }
 }

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import parse from "html-react-parser";
 import axios from "axios";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import "./image.css";
+import { Grid, Box } from "@material-ui/core";
+
+const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com";
 
 const clapicon =
   "https://miro.medium.com/max/2400/1*9M0oeCEgOsovOMz2snw5iw.png";
 
 //const responseicon =
- // "https://www.pngfind.com/pngs/m/77-775446_png-file-svg-chat-bubble-icon-png-transparent.png";
+// "https://www.pngfind.com/pngs/m/77-775446_png-file-svg-chat-bubble-icon-png-transparent.png";
 const style1 = {
   borderTopWidth: "0em",
   borderRightWidth: "0em",
@@ -42,6 +42,7 @@ const tag = {
   paddingTop: "0.2em",
   paddingBottom: "0.20em",
   borderRadius: "0.2em",
+  margin: "1em",
 };
 
 const body = {
@@ -52,6 +53,7 @@ const body = {
 
 const icon = {
   opacity: "20%",
+  width: "70px",
 };
 
 const date = {
@@ -81,7 +83,7 @@ class Article extends Component {
       title: "",
       description: "",
       date: "",
-      taglist: [],
+      taglist: ["Hello", "Shallow", "Meow", "Sheow"],
       clappable: false,
       claped: false,
     };
@@ -94,33 +96,30 @@ class Article extends Component {
       "Content-Type": "application/json;charset=UTF-8",
     };
     await axios
-      .get(process.env.REACT_APP_base_url+"/api/article/" + this.props.match.params.id, {
+      .get(REACT_APP_base_url + "/api/article/" + this.props.match.params.id, {
         headers: headers,
       })
       .then((response) => {
         console.log("Called");
         console.log(response.data);
-         let date  = response.data.article.updatedAt;
-         date = date.substring(0,10);
-         let pname ="";
-         let pdesc = "";
-         let pid = "";
-         let plink = "";
-         if(response.data.publication.exists === false)
-         {
-           pname=response.data.writer.firstname;
-           pdesc= response.data.prof.about;
-           pid = response.data.article.writerid;
-           plink = "/profile/"+pid;
-         }
-         else
-         {
-           pname=response.data.publication.name;
-           pdesc=response.data.publication.description;
-           pid = response.data.publication.pid;
-           plink = "publication"+pid;
-         }
-         /*let clappable=true;
+        let date = response.data.article.updatedAt;
+        date = date.substring(0, 10);
+        let pname = "";
+        let pdesc = "";
+        let pid = "";
+        let plink = "";
+        if (response.data.publication.exists === false) {
+          pname = response.data.writer.firstname;
+          pdesc = response.data.prof.about;
+          pid = response.data.article.writerid;
+          plink = process.env.REACT_APP_profile_url + pid;
+        } else {
+          pname = response.data.publication.name;
+          pdesc = response.data.publication.description;
+          pid = response.data.publication.pid;
+          plink = "/medfrontend/publication/" + pid;
+        }
+        /*let clappable=true;
          if(this.state.userId === response.data.article.writerid)
          {
             clappable=false;
@@ -138,13 +137,12 @@ class Article extends Component {
           name: response.data.writer.firstname,
           writerid: response.data.article.writerid,
           image: response.data.prof.image,
-          taglist: response.data.article.tagslist,
+          //taglist: response.data.article.tagslist,
           claps: response.data.article.claps,
           pname: pname,
           pid: pid,
           plink: plink,
           pdesc: pdesc,
-         
         });
       })
       .catch((err) => {
@@ -155,154 +153,129 @@ class Article extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col xs={12} md={12} lg={2} className="d-none d-lg-block">
-            <Row style={{ marginTop: "1em", position: "fixed" }}>
-              <br />
-            </Row>
-          </Col>
-          <Col xs={11} md={11} lg={7} style={style1}>
+        <Box>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            style={style1}
+          >
             {this.state.title}
-          </Col>
-          <Col xs={1} md={1} lg={2} fluid>
-            {" "}
-          </Col>
-        </Row>
-        <Row style={{ paddingBottom: "0.1em" }}>
-          <Col xs={0} md={0} lg={2}></Col>
-          <Col xs={11} md={11} lg={7}>
-            <Row style={style2}>
-              <Col>
-                <hr />
-                {this.state.description}
-                <hr />
-              </Col>
-            </Row>
-            <Row className="align-items-center">
-              <Col xs={3} md={4} lg={4}>
-                <Row>
-                  <Col lg={4} md={4}>
-                    {" "}
-                    <Image
-                      src={this.state.image}
-                      roundedCircle
-                      fluid
-                      style={{width: "50px", height:"50px"}}
-                    ></Image>
-                  </Col>
-                  <Col xs={10} md={8} lg={8}>
-                    <Link to={'/profile/'+this.state.writerid} style={{color: "black"}}>{this.state.name}</Link> <br />
-                    <p style={date}>{this.state.date}</p>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={1} md={1} lg={2} fluid>
-            {" "}
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "1em" }}>
-          <Col xs={0} md={0} lg={2} className="d-none d-lg-block">
-            <Row>
-              <p style={publication}><Link to={this.state.plink} style={{color: "black"}}>{this.state.pname}</Link></p>
-              <p style={pub_desc}>
-                {" "}
-                {this.state.pdesc}
-                <hr />
-              </p>
-            </Row>
+          </Grid>
+        </Box>
 
-            <Row>
-              <Col xs={0} md={0} lg={5}>
-                <Image src={clapicon} style={icon} fluid></Image>
-              </Col>
-              <Col
-                xs={0}
-                md={0}
-                lg={5}
-                style={{ marginLeft: "-18%", color: "gray" }}
-              >
+        <Box style={style2}>
+          <hr />
+          <Grid container md={3}></Grid>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            style={style2}
+          >
+            {this.state.description}
+          </Grid>
+
+          <hr />
+        </Box>
+
+        <Box style={{ paddingBottom: "1em" }}>
+          
+          <Grid item xs={11} md={11} lg={7}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid container xs={3} md={4} lg={4}>
+                <Grid lg={4} md={4}>
+                  {" "}
+                  <img
+                    src={this.state.image}
+                    alt="Writer pic"
+                    roundedCircle
+                    fluid
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  ></img>
+                </Grid>
+                <Grid xs={10} md={8} lg={8}>
+                  <Link
+                    to={"/medfrontend/profile/" + this.state.writerid}
+                    style={{ color: "black" }}
+                  >
+                    {this.state.name}
+                  </Link>{" "}
+                  <br />
+                  <p style={date}>{this.state.date}</p>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Grid container spacing={3} display={{xs: "none", md:"none", lg:"block"}}>
+          <Grid item lg={2}>
+            <Grid direction="column" style={{ position: "fixed" }}>
+              <Grid item style={{ marginBottom: "2em" }} lg={2}>
+                <p style={publication}>
+                  <Link to={this.state.plink} style={{ color: "black" }}>
+                    {this.state.pname}
+                  </Link>
+                </p>
+              </Grid>
+              <Grid item alignItems="flex-start" lg={2}>
+                <p style={pub_desc}>
+                  {" "}
+                  {this.state.pdesc}
+                  <hr />
+                </p>
+              </Grid>
+              <Grid item alignItems="flex-start" lg={2}>
+                <img src={clapicon} alt="Claps:" style={icon} />
                 {this.state.claps}
-              </Col>
-            </Row>
-            <Row>
-             {/* <Col xs={0} md={0} lg={3} style={{ margin: "7%" }}>
-                <Image
-                  src={responseicon}
-                  style={{ opacity: "70%" }}
-                  fluid
-                ></Image>
-              </Col>
-              <Col
-                xs={0}
-                md={0}
-                lg={5}
-                style={{ marginLeft: "-15%", color: "gray", marginTop: "7%" }}
-              >
-                2
-              </Col>*/}
-            </Row>
-          </Col>
-          <Col xs={11} md={11} lg={7} style={body} fluid>
-            <Row>
-              <Col className="ck-content">{parse(this.state.body)}</Col>
-            </Row>
-          </Col>
-          <Col xs={1} md={1} lg={3} style={body} fluid></Col>
-        </Row>
-        
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item lg={8}>
+            <p className="ck-content" style={body}>
+              {parse(this.state.body)}
+            </p>
+          </Grid>
+        </Grid>
 
-        <Row style={{ paddingTop: "3em", paddingBottom: "3em" }}>
-          <Col xs={0} md={0} lg={2} fluid></Col>
-          <Col xs={11} md={11} lg={7}>
-            <Row>
-              {this.state.taglist.map((list) => {
-                return (
-                  <Col xs={2} md={2} lg={2}>
-                    <div style={tag}>list</div>
-                  </Col>
-                );
-              })}
-            </Row>
-          </Col>
-        </Row>
-                <hr/>
-        <Row>
-          <Col xs={0} md={0} lg={2} fluid></Col>
-          <Col xs={11} md={11} lg={7} style={{ marginLeft: "1em" }} fluid>
-            <Row>
-            <Col xs={4} md={4} lg={4}>
-                <Row className="align-items-center">
-                  {/*<Col xs={6} md={5} lg={4}>
-                    <Image src={responseicon} style={icon} fluid></Image>
-                  </Col>
-                   <Col xs={6} md={4} lg={6} style={{ margin: "-10%" }}>
-                    Responses
-                  </Col> */}
-                </Row>
-              </Col>
-              <Col xs={3} md={3} lg={3} fluid>
-                <Row className="align-items-center">
-                  <Col xs={6} md={7} lg={7}>
-                    <Image src={clapicon} style={icon} fluid></Image>
-                  </Col>
-                  <Col xs={6} md={5} lg={6} style={{ margin: "-17%" }}>
-                    {this.state.claps} Claps
-                  </Col>
-                </Row>
-              </Col>
+        <Grid container spacing={3}>
+          <Grid item lg={2}></Grid>
 
-              
-            </Row>
-          </Col>
-        </Row>
+          {this.state.taglist.map((list) => {
+            return (
+              <Grid xs={2} md={2} lg={2}>
+                <div style={tag}>list</div>
+              </Grid>
+            );
+          })}
+        </Grid>
+        <hr />
+
+        <Grid container spacing={3}>
+          <Grid item lg={2}></Grid>
+          <Grid xs={6} md={7} lg={7}>
+            <img src={clapicon} alt="Claps" style={icon} fluid></img> {this.state.claps}
+          </Grid>
+        </Grid>
+
+        <hr />
         <hr />
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   isLogged: state.user.isLogged,
