@@ -1,6 +1,6 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)  <a href="https://codebeat.co/projects/github-com-pulkit1joshi-medfrontend-main"><img alt="codebeat badge" src="https://codebeat.co/badges/2006c5a6-d7a2-44e7-b800-ecc9ecc1f8cd" /></a>
 
-# Handbook Codes
+# Medium Clone Frontend
 <br />
 
 <p align="center">
