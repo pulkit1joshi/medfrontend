@@ -66,4 +66,13 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 
-
+## Features
+### Done
+1. Added basic JWT authentication. (Backend-Frontend)
+2. Profile settings added.
+3. Profile view added.
+4. Post feature with Rich Text Editor added.
+### Todo
+1. Clap functionality
+2. Landing page UI
+3. Implement publication on frontend.
