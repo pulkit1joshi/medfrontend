@@ -50,7 +50,7 @@ This project aims to build a medium like blog posting platform which any organis
 ## Roadmap
 
 - [Open issue](https://github.com/pulkit1joshi/medfrontend/issues) if you want a particular part of the handbook to be implemented earlier or have any issue in the present codes.
-- Further, more features will be added as I get time. :)
+- Further, more features will be added as I get time. Do star it, motivates me to work over a project. :)
 
 
 
