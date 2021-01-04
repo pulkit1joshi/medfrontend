@@ -8,7 +8,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import Image from "react-bootstrap/Image"
+import Image from "react-bootstrap/Image";
+import { Grid } from "@material-ui/core";
 import "./profile.css"
 
 const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
@@ -201,6 +202,7 @@ class Profile extends Component {
     if(this.props.isLogged)
     {
     return (
+      <Grid xs={8} md={8} lg={8}>
       <Container fluid>
         <Row>
           <Col
@@ -582,6 +584,7 @@ class Profile extends Component {
           </Col>
         </Row>
       </Container>
+      </Grid>
     );
     }
     else return <Redirect to={"/medfrontend/auth/login"}/>

@@ -153,7 +153,6 @@ class Article extends Component {
   render() {
     return (
       <div>
-        <Box>
           <Grid
             container
             direction="row"
@@ -163,7 +162,6 @@ class Article extends Component {
           >
             {this.state.title}
           </Grid>
-        </Box>
 
         <Box style={style2}>
           <hr />
@@ -182,8 +180,8 @@ class Article extends Component {
         </Box>
 
         <Box style={{ paddingBottom: "1em" }}>
-          
-          <Grid item xs={11} md={11} lg={7}>
+          <Grid container xs={2} md={2} lg={2}></Grid>
+          <Grid item xs={8} md={8} lg={8}>
             <Grid
               container
               direction="row"
@@ -191,7 +189,8 @@ class Article extends Component {
               alignItems="center"
             >
               <Grid container xs={3} md={4} lg={4}>
-                <Grid lg={4} md={4}>
+              <Grid xs={4} lg={4} md={4}></Grid>
+                <Grid xs={4} lg={4} md={4}>
                   {" "}
                   <img
                     src={this.state.image}
@@ -205,9 +204,9 @@ class Article extends Component {
                     }}
                   ></img>
                 </Grid>
-                <Grid xs={10} md={8} lg={8}>
+                <Grid xs={4} md={4} lg={4}>
                   <Link
-                    to={"/medfrontend/profile/" + this.state.writerid}
+                    to={process.env.REACT_APP_profile_url + this.state.writerid}
                     style={{ color: "black" }}
                   >
                     {this.state.name}
@@ -220,8 +219,9 @@ class Article extends Component {
           </Grid>
         </Box>
 
-        <Grid container spacing={3} display={{xs: "none", md:"none", lg:"block"}}>
-          <Grid item lg={2}>
+        <Grid container display={{xs: "none", md:"none", lg:"block"}}>
+        <Grid item lg={2} md={2} sm={2}></Grid>
+          <Grid item lg={2} md={2} sm={2}>
             <Grid direction="column" style={{ position: "fixed" }}>
               <Grid item style={{ marginBottom: "2em" }} lg={2}>
                 <p style={publication}>
@@ -243,8 +243,8 @@ class Article extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item lg={8}>
-            <p className="ck-content" style={body}>
+          <Grid item lg={6} md={6} xs={6}>
+            <p className="ck-content" alignItems="flex-start" style={body}>
               {parse(this.state.body)}
             </p>
           </Grid>

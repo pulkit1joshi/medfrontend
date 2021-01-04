@@ -4,7 +4,7 @@ import ShowCase from './showcase'
 export default class index extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <ShowCase/>
             </div>
         )

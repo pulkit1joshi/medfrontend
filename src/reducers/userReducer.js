@@ -13,6 +13,7 @@ export default function(state = initialState, action) {
     switch(action.type){
         case UPDATE_USER:
             {
+                console.log(action.payload.isLogged);
             return {
                 ...state,
                 isLogged: action.payload.isLogged,

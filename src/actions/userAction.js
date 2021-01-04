@@ -18,14 +18,19 @@ export const updateUser = (val) => (dispatch) => {
       })
       .then((response) => {
         console.log(response.data);
+        if(!response.data.user2 ||  !response.data.user) 
+        {
+          console.log("Big error");
+        }
         val = {
           isLogged: true,
           userName: response.data.user2.firstname,
           userId: response.data.user.userid,
           email: response.data.user2.email,
-          name: response.data.user.firstname,
+          name: response.data.user2.firstname,
           imageUrl: response.data.user.image,
         };
+        console.log(val);
         dispatch({
           type: UPDATE_USER,
           payload: val,

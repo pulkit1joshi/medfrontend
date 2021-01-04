@@ -9,15 +9,15 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 10
   },
   paper: {
     padding: theme.spacing(2),
     margin: "auto",
+    boxShadow: "none"
   },
   image: {
-    width: "200px",
-    height: "200px",
+    width: "150px",
+    height: "150px",
   },
   img: {
     margin: "auto",
@@ -40,19 +40,29 @@ const description = {
   fontFamily: "sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif",
 };
 
+function min(x,y)
+{
+  if(x<y) return x;
+  return y;
+}
+
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: this.props.data.updatedAt.substring(0, 10),
       img: "",
+      description: this.props.data.description.substring(0,min(100,this.props.data.description.length))+"...",
+      title: this.props.data.title.substring(0,min(30,this.props.data.title.length))+".",
     };
   }
+
+
 
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <Grid item className={classes.root}>
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
 
@@ -61,19 +71,17 @@ class Card extends Component {
                 <Grid item xs={8} md={8} lg={8}>
                   <Typography gutterBottom noWrap  variant="subtitle1">
                   <Link to={"/medfrontend/post/" + this.props.data._id} style={head}>
-                    {this.props.data.title} 
+                    {this.state.title} 
                     </Link>
                   </Typography>
 
                   <p variant="body2" color="textSecondary" noWrap={true} style={description}>
-                    {this.props.data.description} </p>
-                      <Typography variant="body2" style={{ cursor: "pointer" }}>
+                    {this.state.description} </p>
+                      <Typography variant="body2" style={{ cursor: "pointer", fontSize:"13px" }}>
                     {this.state.date}
                   </Typography>
                 </Grid>
-                <Grid item xs={12} lg={12} md={12}>
-                  
-                </Grid>
+                
               </Grid>
             </Grid>
             <Grid item xs={4} md={4} lg={4}>
@@ -87,7 +95,7 @@ class Card extends Component {
             </Grid>
           </Grid>
         </Paper>
-      </div>
+      </Grid>
     );
   }
 }

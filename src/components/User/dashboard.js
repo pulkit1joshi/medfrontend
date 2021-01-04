@@ -130,6 +130,7 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
+      <Grid container md={7} lg={7} xs={7}>
         <Grid container direction="row" justify="center" alignItems="center">
           <p style={head}>
             {" "}
@@ -142,7 +143,7 @@ class Dashboard extends Component {
         </Grid>
         <Divider style={{width:"100%"}}/>
         <Grid container justify="space-between">
-          <Grid container justify="space-between" lg={2} style={{marginTop: "2em"}}>
+          <Grid container justify="space-between" lg={1} style={{marginTop: "2em"}}>
           <Box display={{ xs: "none", md: "none", lg: "block" }}>
             <Grid direction="column" style={{ position: "fixed" }} >
               <Grid item style={{ marginBottom: "2em" }} lg={3}>
@@ -178,11 +179,13 @@ class Dashboard extends Component {
           md={12}
         >
           {this.state.posts && this.state.posts.map((post) => {
+            console.log(post);
             return <Card2 data={post} />;
           })}
         </Grid>
 </Grid>
         <hr />
+        </Grid>
       </React.Fragment>
     );
   }

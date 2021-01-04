@@ -1,7 +1,6 @@
 import Auth from "./components/Auth";
 import Navig from "./components/Nav";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -15,7 +14,6 @@ function App() {
     <Provider store={store}>
       <Router>
         <Navig />
-        <Container>
           <Switch>
             <Route path="/medfrontend/auth">
               <Grid
@@ -40,7 +38,7 @@ function App() {
               <Main />
             </Route>
           </Switch>
-        </Container>
+        
       </Router>
     </Provider>
   );
