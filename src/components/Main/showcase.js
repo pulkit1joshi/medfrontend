@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Card from "./card";
-import { AppBar, Toolbar, Typography, Grid } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Grid, Container } from "@material-ui/core";
 
 const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com"
 
@@ -92,27 +92,30 @@ class ShowCase extends Component {
       <AppBar position="static" style={{ backgroundColor: this.state.color, paddingBottom: "3.5em", flexGrow: "1",boxShadow:"none", borderBottom: "1px solid black", paddingTop: "3em", borderTop: "1px solid black" }}>
       <Grid container xs={12} md={12} lg={12}>
             <Toolbar style={{ flexGrow: 1 , paddingTop: "3.5em"}}>
-              <Grid item xs={2} md={2} lg={2}></Grid>
-              <Grid item xs={3} md={3} lg={3}><Typography variant="h1" style={body}>
+              <Grid item xs={1} md={2} lg={2}></Grid>
+              <Grid item xs={8} md={3} lg={3}><Typography variant="h1" style={body}>
               Explore new perspectives
               </Typography><br/>
               <Typography style={{marginTop: "1em", color: "black", fontSize: "20px"}}>Read and share ideas from independent voices, world-class publications, and experts from around the globe. Everyone's welcome.</Typography>
+              
               </Grid>
-              <Grid item xs={2} md={2} lg={2}></Grid>
+              <Grid item xs={0} md={2} lg={2}></Grid>
               </Toolbar>
       </Grid>
       </AppBar>
       <Grid container style={{marginTop: "3.5em"}}>
-      <Grid item xs={2} md={2} lg={2} ></Grid>
+      <Grid item xs={1} md={2} lg={2} ></Grid>
       
-        <Grid item xs={10} md={10} lg={5} style={{borderRight: "1px solid lightgray"}}><p style={recents}>RECENT CONTENT ON MEDBOOK</p><br/>
+        <Grid item xs={10} md={10} lg={5} ><p style={recents}>RECENT CONTENT ON MEDBOOK</p><br/>
         {this.state.posts.map((post) => {
             console.log(post.title);
             return <Card data={post} />;
           })}
           </Grid>
-        <Grid item xs={0} md={0} lg={2} display={{xs: "none", md:"none", lg:"block"}}>
+        <Grid item xs={0} md={0} lg={2} display={{xs: "none", md:"none", lg:"block"}} >
+          <Container style={{borderLeft: "1px solid lightgray"}}>
               <p style={tags}>READ WHAT MATTERS TO YOU</p>
+              </Container>
           </Grid>
           <Grid item xs={2} md={2} lg={2} ></Grid>
           

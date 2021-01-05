@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //import Button from 'react-bootstrap/Button';
 import axios from "axios";
-import { Grid, Box, Divider, Typography } from "@material-ui/core";
+import { Grid, Divider, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import "./profile.css";
 import Card2 from "../Main/bigcard";
@@ -34,14 +34,12 @@ const details = {
   color: "gray",
   fontFamily: 'sohne, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontSize: "14px",
+  width: "100%"
 };
 
 const img = {
   borderRadius:"50%",
-  margin: "auto",
   display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%",
   height: "130px",
   width: "130px",
 };
@@ -134,7 +132,8 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
-      <Grid container md={7} lg={7} xs={7} style={dashPad}>
+      <Grid container style={dashPad}>
+      <Grid item md={2} lg={2} xs={2}></Grid>
         <Grid container direction="row" justify="center" alignItems="center">
           <p style={head}>
             {" "}
@@ -146,12 +145,12 @@ class Dashboard extends Component {
           
         </Grid>
         <Divider style={{width:"100%"}}/>
-        <Grid container justify="space-between">
-          <Grid container justify="space-between" lg={1} style={{marginTop: "2em"}}>
-          <Box display={{ xs: "none", md: "none", lg: "block" }}>
-            <Grid direction="column" style={{ position: "fixed" }} >
-              <Grid item style={{ marginBottom: "2em" }} lg={3}>
-                <ButtonBase style={img}>
+        <Grid container xs={12} md={12} lg={12}>
+          <Grid item xs={1} lg={2} md={2}></Grid>
+          <Grid item  xs={1} lg={2} md={2} style={{marginTop: "2em"}} direction="column" className="d-none d-lg-block">
+          <Grid  lg={10} display={{ xs: "none", md: "none", lg: "block" }} style={{positon: "fixed"}}>
+              <Grid item style={{ marginBottom: "2em" }} lg={8} >
+                <ButtonBase>
                   <img
                     style={img}
                     alt="Writers profile pic"
@@ -160,27 +159,27 @@ class Dashboard extends Component {
                 </ButtonBase>
               </Grid>
 
-              <Grid item alignItems="flex-start" lg={3}>
+              <Grid item alignItems="flex-start" lg={8}>
                 <p style={details}> ABOUT </p>
               </Grid>
-              <Grid item alignItems="flex-start" lg={3}>
+              <Grid item alignItems="flex-start" lg={8}>
                 <p style={{ fontWeight: "bold", fontSize: "16px" }}>
                   {" "}
                   {this.state.firstname} {this.state.lastname}
                 </p>
               </Grid>
-              <Grid item alignItems="flex-start" lg={3}>
-                <Typography style={details}> {this.state.bio} </Typography>
+              <Grid item alignItems="flex-start"  lg={8}>
+              <Typography style={details}>{this.state.bio} </Typography>
               </Grid>
             </Grid>
-            </Box>
           </Grid>
+          
         <Grid
-          container
+          item
           justify="space-between"
-          lg={9}
-          xs={12}
-          md={12}
+          lg={5}
+          xs={10}
+          md={8}
         >
           {this.state.posts && this.state.posts.map((post) => {
             console.log(post);

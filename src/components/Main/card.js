@@ -65,9 +65,9 @@ class Card extends Component {
         <Paper className={classes.paper}>
           <Grid container>
 
-            <Grid item xs={8} md={8} lg={8} container>
+            <Grid item xs={12} md={8} lg={8} container>
               <Grid item xs container direction="column">
-                <Grid item xs={8} md={8} lg={8}>
+                <Grid item xs={10} md={8} lg={8}>
                  
                   <Link to={"/medfrontend/post/" + this.props.data._id} style={head}>
                   <Typography style={{fontSize: "20px", fontWeight: "500"}} gutterBottom noWrap>{this.state.title} </Typography>
@@ -82,7 +82,7 @@ class Card extends Component {
                 
               </Grid>
             </Grid>
-            <Grid item xs={4} md={4} lg={4}>
+            <Grid item xs={0} md={4} lg={4} className="d-none d-lg-block d-md-block">
               <ButtonBase className={classes.image}>
                 <img
                   className={classes.img}

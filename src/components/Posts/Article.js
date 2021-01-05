@@ -157,6 +157,7 @@ class Article extends Component {
   render() {
     return (
       <div style={articlePad}>
+      <Grid container xs={1} lg={1} md={1}></Grid>
           <Grid
             container
             direction="row"
@@ -179,22 +180,22 @@ class Article extends Component {
           >
             {this.state.description}
           </Grid>
-
+          <Grid container md={1} xs={1} lg={1}></Grid>
           <hr />
         </Box>
 
         <Box style={{ paddingBottom: "1em" }}>
-          <Grid container xs={2} md={2} lg={2}></Grid>
-          <Grid container xs={8} md={8} lg={8}>
+          <Grid container xs={1} md={2} lg={2}></Grid>
+          <Grid container xs={10} md={8} lg={8}>
             <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
             >
-            <Grid container xs={4} md={4} lg={4}></Grid>
-              <Grid container xs={3} md={4} lg={4}>
-                <Grid xs={3} lg={3} md={3}>
+            <Grid container xs={1} md={4} lg={4}></Grid>
+              <Grid container xs={10} md={4} lg={4}>
+                <Grid xs={4} lg={3} md={3}>
                   {" "}
                   <img
                     src={this.state.image}
@@ -223,10 +224,12 @@ class Article extends Component {
           </Grid>
         </Box>
 
-        <Grid container display={{xs: "none", md:"none", lg:"block"}}>
-        <Grid item lg={2} md={2} sm={2}></Grid>
-          <Grid item lg={2} md={2} sm={2}>
-            <Grid direction="column" style={{ position: "fixed", paddingLeft: "7em" }}>
+        <Grid container  >
+        <Grid item lg={2} md={1} xs={1}></Grid>
+          
+
+        <Grid item lg={2} md={2} xs={12} className="d-none d-lg-block">
+            <Grid item direction="column" style={{ paddingLeft: "7em" }} >
               <Grid item style={{ marginBottom: "2em" }} lg={2}>
                 <p style={publication}>
                   <Link to={this.state.plink} style={{ color: "black" }}>
@@ -234,21 +237,22 @@ class Article extends Component {
                   </Link>
                 </p>
               </Grid>
-              <Grid item alignItems="flex-start" lg={2}>
+              <Grid item alignItems="flex-start" lg={10}>
                 <p style={pub_desc}>
                   {" "}
                   {this.state.pdesc}
                   <hr />
                 </p>
               </Grid>
-              <Grid item alignItems="flex-start" lg={2}>
+              <Grid item alignItems="flex-start" lg={10}>
                 <img src={clapicon} alt="Claps:" style={icon} />
                 {this.state.claps}
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item lg={5} md={5} xs={5}>
-            <p className="ck-content" alignItems="flex-start" style={body}>
+
+            </Grid>
+          <Grid item lg={5} md={8} xs={10}>
+            <p className="ck-content" style={body}>
               {parse(this.state.body)}
             </p>
           </Grid>

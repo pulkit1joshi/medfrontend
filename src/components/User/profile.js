@@ -587,7 +587,7 @@ class Profile extends Component {
       </Grid>
     );
     }
-    else return <Redirect to={"/medfrontend/auth/login"}/>
+    else return <Redirect to={"/medfrontend/"}/>
           
   }
 }
