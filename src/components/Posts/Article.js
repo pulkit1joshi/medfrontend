@@ -20,7 +20,6 @@ const style1 = {
   borderLeftWidth: "0em",
   boxShadow: "none",
   backgroundColor: "white",
-  paddingLeft: "0.15em",
   fontFamily: 'fell, Georgia, Cambria, "Times New Roman", Times, serif',
   fontSize: "3.5em",
   fontStyle: "normal",
@@ -71,11 +70,11 @@ const style2 = {
   boxShadow: "none",
   borderRadius: "1px",
   backgroundColor: "white",
-  textAlign: "right",
   fontFamily: 'fell, Georgia, Cambria, "Times New Roman", Times, serif',
   fontSize: "20px",
   marginTop: "0.5em",
   marginBottom: "0.5em",
+  marginRight: "0.5em",
 };
 
 class Article extends Component {
@@ -157,30 +156,35 @@ class Article extends Component {
   render() {
     return (
       <div style={articlePad}>
-      <Grid container xs={1} lg={1} md={1}></Grid>
+      <Grid container>
+        <Grid item xs={1} lg={4} md={4}></Grid>
           <Grid
-            container
+            item
             direction="row"
-            justify="center"
+            justify="flex-left"
             alignItems="center"
             style={style1}
+            md={5} lg={5} xs={10}
           >
             {this.state.title}
           </Grid>
-
+        </Grid>
         <Box style={style2}>
           <hr />
-          <Grid container md={3}></Grid>
+          <Grid container>
+          <Grid item xs={1} lg={4} md={4}></Grid>
           <Grid
-            container
+            item
             direction="row"
-            justify="center"
+            justify="flex-left"
             alignItems="center"
             style={style2}
+            md={5} lg={5} xs={10}
           >
             {this.state.description}
           </Grid>
-          <Grid container md={1} xs={1} lg={1}></Grid>
+          <Grid item md={1} xs={1} lg={1}></Grid>
+          </Grid>
           <hr />
         </Box>
 
