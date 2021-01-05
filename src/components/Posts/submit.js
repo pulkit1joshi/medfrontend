@@ -152,7 +152,7 @@ class Editor2 extends Component {
   render() {
     if (this.props.isLogged) {
       return (
-        <div>
+        <div style={{paddingTop: "7em", marginLeft: "1em"}}>
         <Row style={{marginBottom:"1em"}}>
         <Col xs={12} md={12} lg={2} className="d-none d-lg-block">
             <Row style={{ marginTop: "1em", position: "fixed" }}>

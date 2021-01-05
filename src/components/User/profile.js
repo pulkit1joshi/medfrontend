@@ -202,7 +202,7 @@ class Profile extends Component {
     if(this.props.isLogged)
     {
     return (
-      <Grid xs={8} md={8} lg={8}>
+      <Grid xs={8} md={8} lg={8} style={{paddingTop: "7em"}}>
       <Container fluid>
         <Row>
           <Col
