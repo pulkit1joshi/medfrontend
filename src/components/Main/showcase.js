@@ -89,7 +89,7 @@ class ShowCase extends Component {
   render() {
     return (
       <div>
-      <AppBar position="static" style={{ backgroundColor: this.state.color, paddingBottom: "3.5em", flexGrow: "1",boxShadow:"none", borderBottom: "1px solid black" }}>
+      <AppBar position="static" style={{ backgroundColor: this.state.color, paddingBottom: "3.5em", flexGrow: "1",boxShadow:"none", borderBottom: "1px solid black", paddingTop: "3em", borderTop: "1px solid black" }}>
       <Grid container xs={12} md={12} lg={12}>
             <Toolbar style={{ flexGrow: 1 , paddingTop: "3.5em"}}>
               <Grid item xs={2} md={2} lg={2}></Grid>
@@ -105,7 +105,7 @@ class ShowCase extends Component {
       <Grid container style={{marginTop: "3.5em"}}>
       <Grid item xs={2} md={2} lg={2} ></Grid>
       
-        <Grid item xs={10} md={10} lg={5} ><p style={recents}>RECENT CONTENT ON MEDBOOK</p><br/>
+        <Grid item xs={10} md={10} lg={5} style={{borderRight: "1px solid lightgray"}}><p style={recents}>RECENT CONTENT ON MEDBOOK</p><br/>
         {this.state.posts.map((post) => {
             console.log(post.title);
             return <Card data={post} />;

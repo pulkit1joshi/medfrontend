@@ -18,6 +18,10 @@ const head = {
   fontFamily:"font-family: sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif",
 };
 
+const dashPad = {
+  paddingTop: "5em"
+}
+
 const head2 = {
   marginBottom: "3em",
   color: "gray",
@@ -130,7 +134,7 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
-      <Grid container md={7} lg={7} xs={7}>
+      <Grid container md={7} lg={7} xs={7} style={dashPad}>
         <Grid container direction="row" justify="center" alignItems="center">
           <p style={head}>
             {" "}

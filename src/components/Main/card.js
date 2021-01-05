@@ -11,16 +11,16 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
-    margin: "auto",
-    boxShadow: "none"
+    paddingLeft: theme.spacing(2),
+    margin: "0em",
+    boxShadow: "none",
   },
   image: {
     width: "150px",
     height: "150px",
   },
   img: {
-    margin: "auto",
+    margin: "0em",
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%",
@@ -31,13 +31,11 @@ const head = {
   fontWeight: "700",
   fontSize: "20px",
   color: "#333",
-  fontFamily: "Maven Pro",
 };
 
 const description = {
   color: "gray",
   fontSize: "16px",
-  fontFamily: "sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif",
 };
 
 function min(x,y)
@@ -63,21 +61,21 @@ class Card extends Component {
     const { classes } = this.props;
     return (
       <Grid item className={classes.root}>
+      <hr/>
         <Paper className={classes.paper}>
-          <Grid container spacing={2}>
+          <Grid container>
 
             <Grid item xs={8} md={8} lg={8} container>
               <Grid item xs container direction="column">
                 <Grid item xs={8} md={8} lg={8}>
-                  <Typography gutterBottom noWrap  variant="subtitle1">
+                 
                   <Link to={"/medfrontend/post/" + this.props.data._id} style={head}>
-                    {this.state.title} 
+                  <Typography style={{fontSize: "20px", fontWeight: "500"}} gutterBottom noWrap>{this.state.title} </Typography>
                     </Link>
-                  </Typography>
 
                   <p variant="body2" color="textSecondary" noWrap={true} style={description}>
                     {this.state.description} </p>
-                      <Typography variant="body2" style={{ cursor: "pointer", fontSize:"13px" }}>
+                      <Typography variant="body2" style={{ cursor: "pointer", fontSize:"13px", marginTop: "auto" }}>
                     {this.state.date}
                   </Typography>
                 </Grid>
@@ -95,6 +93,7 @@ class Card extends Component {
             </Grid>
           </Grid>
         </Paper>
+        <hr/>
       </Grid>
     );
   }

@@ -26,13 +26,17 @@ const style1 = {
   fontStyle: "normal",
 };
 
+const articlePad = {
+  paddingTop:"7em",
+}
+
 const publication = {
   fontSize: "1.2em",
   fontWeight: "bold",
 };
 const pub_desc = {
   color: "gray",
-  paddingRight: "1.5em",
+  paddingRight: "0em",
 };
 const tag = {
   backgroundColor: "lightgray",
@@ -152,7 +156,7 @@ class Article extends Component {
 
   render() {
     return (
-      <div>
+      <div style={articlePad}>
           <Grid
             container
             direction="row"
@@ -181,16 +185,16 @@ class Article extends Component {
 
         <Box style={{ paddingBottom: "1em" }}>
           <Grid container xs={2} md={2} lg={2}></Grid>
-          <Grid item xs={8} md={8} lg={8}>
+          <Grid container xs={8} md={8} lg={8}>
             <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
             >
+            <Grid container xs={4} md={4} lg={4}></Grid>
               <Grid container xs={3} md={4} lg={4}>
-              <Grid xs={4} lg={4} md={4}></Grid>
-                <Grid xs={4} lg={4} md={4}>
+                <Grid xs={3} lg={3} md={3}>
                   {" "}
                   <img
                     src={this.state.image}
@@ -222,7 +226,7 @@ class Article extends Component {
         <Grid container display={{xs: "none", md:"none", lg:"block"}}>
         <Grid item lg={2} md={2} sm={2}></Grid>
           <Grid item lg={2} md={2} sm={2}>
-            <Grid direction="column" style={{ position: "fixed" }}>
+            <Grid direction="column" style={{ position: "fixed", paddingLeft: "7em" }}>
               <Grid item style={{ marginBottom: "2em" }} lg={2}>
                 <p style={publication}>
                   <Link to={this.state.plink} style={{ color: "black" }}>
@@ -243,19 +247,20 @@ class Article extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item lg={6} md={6} xs={6}>
+          <Grid item lg={5} md={5} xs={5}>
             <p className="ck-content" alignItems="flex-start" style={body}>
               {parse(this.state.body)}
             </p>
           </Grid>
         </Grid>
 
-        <Grid container spacing={3}>
+        <Grid container>
+        <Grid item lg={2} md={2} xs={2}></Grid>
           <Grid item lg={2}></Grid>
 
           {this.state.taglist.map((list) => {
             return (
-              <Grid xs={2} md={2} lg={2}>
+              <Grid xs={1} md={1} lg={1}>
                 <div style={tag}>list</div>
               </Grid>
             );
@@ -263,9 +268,11 @@ class Article extends Component {
         </Grid>
         <hr />
 
-        <Grid container spacing={3}>
-          <Grid item lg={2}></Grid>
-          <Grid xs={6} md={7} lg={7}>
+        <Grid container>
+          <Grid item lg={4} md={4} xs={4}></Grid>
+          <Grid item xs={6} md={6} lg={6} 
+            justify="center"
+            alignItems="center">
             <img src={clapicon} alt="Claps" style={icon} fluid></img> {this.state.claps}
           </Grid>
         </Grid>

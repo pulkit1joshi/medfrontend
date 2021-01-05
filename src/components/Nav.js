@@ -26,6 +26,11 @@ import {
   color: "black"
 };*/
 
+const body = {
+  fontFamily: "charter, Georgia, Cambria, 'Times New Roman', Times, serif",
+  textTransform: "capitalize"
+}
+const height = 44;
 const REACT_APP_base_url = "https://evening-anchorage-15734.herokuapp.com";
 class Navig extends Component {
   constructor(props) {
@@ -35,10 +40,14 @@ class Navig extends Component {
       userName: "",
       imageUrl: "",
       open: false,
+      openreg: false,
       email: "",
       password: "",
-      show_input: false,
       errortext: "",
+      firstname: "",
+      lastname: "",
+      username: "",
+      isRegistered: false,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
@@ -46,6 +55,9 @@ class Navig extends Component {
     this.props.updateUser();
     this.logout = this.logout.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleCloseReg = this.handleCloseReg.bind(this);
+    this.handleOpenReg = this.handleOpenReg.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onChange(e) {
@@ -58,8 +70,41 @@ class Navig extends Component {
     this.setState({ [name]: value });
   }
 
+  async handleSubmit() {
+    console.log("YOYO");
+    const data = JSON.stringify({
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+    });
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    await axios
+      .post(REACT_APP_base_url + "/api/user/register", data, {
+        headers: headers,
+      })
+
+      .then((response) => {
+        if (response.data.error) {
+          this.setState({ errortext: response.data.msg });
+          console.log(response.data.error);
+        } else {
+          this.setState({ isRegistered: true });
+          this.handleCloseReg();
+          this.handleOpen();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   handleSubmitLogin() {
-    this.setState({ open: false });
     const data = JSON.stringify({
       email: this.state.email,
       password: this.state.password,
@@ -77,18 +122,35 @@ class Navig extends Component {
       .then((response) => {
         if (response.data.error) {
           this.setState({ errortext: response.data.msg });
+          console.log(response.data.error);
         } else {
           sessionStorage.setItem("medtoken", response.data.msg.token);
           this.props.updateUser({ isLogged: true, userName: "Someone" });
           this.setState({
             isLogged: true,
+            
           });
+          this.handleClose();
         }
       })
       .catch((err) => {
         console.log(err);
       });
-    this.handleOpen();
+    
+  }
+
+  handleCloseReg() {
+    console.log("YOYO");
+    this.setState({
+      openreg: false,
+    });
+    console.log(this.state.open);
+  }
+
+  handleOpenReg() {
+    this.setState({
+      openreg: true,
+    });
   }
 
   handleClose() {
@@ -123,56 +185,191 @@ class Navig extends Component {
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
             aria-describedby="simple-modal-description"
-            contentStyle={{width: "100%", maxWidth: "none"}}
             fullWidth={true}
           >
-          <DialogTitle id="form-dialog-title" ><p style={{fontSize: "3em"}}>Login</p></DialogTitle>
-          <DialogContent>
-          <p style={{fontSize: "10px", color: "red"}}>{this.state.errortext}</p>
-            <TextField
-            style={{fontSize: "3em"}}
-            name="email"
-              defaultValue="Email"
-              value={this.state.email}
-              onChange={this.onChange}
-              inputProps={{ "aria-label": "description" }}
-              fullWidth
-              label="Email"
-              size="big"
-              InputProps={{
-            style: {fontSize: 11}
-            
-          }}
-            />
-            <br/>
-            <TextField
-            name="password"
-              defaultValue="Password"
-              label="Password"
-              type="password"
-              value={this.state.password}
-              onChange={this.onChange}
-              inputProps={{ "aria-label": "description" }}
-              size="large"
-              fullWidth
-            />
+            <DialogTitle id="form-dialog-title" style={{ paddingBottom: 0 }}>
+              <p style={{ fontSize: "3em",fontFamily: "charter, Georgia, Cambria, 'Times New Roman', Times, serif", }}>Sign in</p>
+            </DialogTitle>
+            <DialogContent>
+              <p style={{ fontSize: "10px", color: "red" }}>
+                {this.state.errortext}
+              </p>
+              <TextField
+                name="email"
+                defaultValue="Email"
+                value={this.state.email}
+                onChange={this.onChange}
+                fullWidth
+                label="Email"
+                size="big"
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                name="password"
+                defaultValue="Password"
+                label="Password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChange}
+                size="large"
+                fullWidth
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
             </DialogContent>
-            
+
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
+              <Button
+                onClick={this.handleClose}
+                style={{ fontSize: 17 }}
+                color="primary"
+              >
                 Cancel
               </Button>
-              <Button onClick={this.handleSubmitLogin} color="primary">
-                Login
+              <Button
+                onClick={this.handleSubmitLogin}
+                style={{ fontSize: 17 }}
+                color="primary"
+              >
+                Sign in
               </Button>
             </DialogActions>
           </Dialog>
+
+
+          <Dialog
+            open={this.state.openreg}
+            onClose={this.handleCloseReg}
+            aria-labelledby="form-dialog-title"
+            aria-describedby="simple-modal-description"
+            fullWidth={true}
+          >
+            <DialogTitle id="form-dialog-title" style={{ paddingBottom: 0 }}>
+              <p style={{ fontSize: "3em", fontFamily: "charter, Georgia, Cambria, 'Times New Roman', Times, serif"  }}>Sign Up</p>
+            </DialogTitle>
+            <DialogContent>
+              <p style={{ fontSize: "10px", color: "red" }}>
+                {this.state.errortext}
+              </p>
+              <TextField
+                name="firstname"
+                defaultValue="First Name"
+                fullWidth
+                value={this.state.firstname}
+                onChange={this.onChange}
+                label="First Name"
+                
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+
+              <TextField
+                name="lastname"
+                defaultValue="Last Name"
+                fullWidth
+                value={this.state.lastname}
+                onChange={this.onChange}
+                label="Last Name"
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+              <TextField
+                name="username"
+                defaultValue="User Name"
+                fullWidth
+                value={this.state.username}
+                onChange={this.onChange}
+                label="User Name"
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+              <br/>
+              <TextField
+                name="email"
+                defaultValue="Email"
+                value={this.state.email}
+                onChange={this.onChange}
+                fullWidth
+                label="Email"
+                size="big"
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                name="password"
+                defaultValue="Password"
+                label="Password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChange}
+                size="large"
+                fullWidth
+                inputProps={{
+                  style: {
+                    height,
+                    fontSize: 15,
+                  },
+                }}
+              />
+            </DialogContent>
+
+            <DialogActions>
+              <Button
+                onClick={this.handleCloseReg}
+                style={{ fontSize: 17 }}
+                color="primary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={this.handleSubmit}
+                style={{ fontSize: 17 }}
+                color="primary"
+              >
+                Sign Up
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+
+
+
+
+          
           <AppBar
             position="static"
             style={{
-              backgroundColor: "#FFC017",
-              paddingBottom: "5em",
+              backgroundColor: "rgba(255, 192, 23, 0.1)",
+              marginBottom: "0em",
               boxShadow: "none",
+              
             }}
           >
             <Grid
@@ -182,15 +379,18 @@ class Navig extends Component {
               lg={12}
               style={{
                 position: "fixed",
-                backgroundColor: "inherit",
                 display: "block",
                 zIndex: "100",
+                paddingTop: "0.5em",
+                paddingBottom: "0.5em",
+                borderBottom: "1px solid black",
+                backgroundColor: "rgba(255, 192, 23, 0.5)",
+                
               }}
             >
               <Toolbar
                 style={{
                   flexGrow: 1,
-                  borderBottom: "1px solid black",
                   borderColor: "black",
                 }}
               >
@@ -207,9 +407,9 @@ class Navig extends Component {
                     </Link>
                   </Typography>
                 </Grid>
-                <Grid item xs={4} md={4} lg={4}></Grid>
+                <Grid item xs={5} md={5} lg={5}></Grid>
                 <Grid item className="d-none d-lg-block">
-                  <Button color="inherit" onClick={this.handleOpen}>
+                  <Button color="inherit" onClick={this.handleOpen} style={body}>
                     <Link
                       exact
                       //to="/medfrontend/auth/login"
@@ -220,17 +420,17 @@ class Navig extends Component {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Button color="inherit">
+                  <Button color="inherit" onClick={this.handleOpenReg} style={body}>
                     <Link
                       exact
-                      to="/medfrontend/auth/register"
+                      //to="/medfrontend/auth/register"
                       style={{ fontSize: "2em", color: "black" }}
                     >
                       Sign up
                     </Link>
                   </Button>
                 </Grid>
-                <Grid item xs={2} md={2} lg={2}></Grid>
+                <Grid item xs={1} md={1} lg={1}></Grid>
                 <hr />
               </Toolbar>
             </Grid>
@@ -244,7 +444,6 @@ class Navig extends Component {
             position="static"
             style={{
               backgroundColor: "#FFFF",
-              paddingBottom: "5em",
               boxShadow: "none",
             }}
           >
@@ -258,13 +457,14 @@ class Navig extends Component {
                 backgroundColor: "inherit",
                 display: "block",
                 zIndex: "100",
+                paddingTop: "0.5em",
+                paddingBottom: "0.5em",
+                borderBottom: "1px solid black"
               }}
             >
               <Toolbar
                 style={{
                   flexGrow: 1,
-                  borderBottom: "1px solid black",
-                  borderColor: "lightgray",
                 }}
               >
                 <Grid item xs={2} md={2} lg={2}></Grid>
@@ -276,7 +476,7 @@ class Navig extends Component {
                       to="/medfrontend/"
                       style={{ fontWeight: "bold", color: "black" }}
                     >
-                      Med-book
+                      MedBook
                     </Link>
                   </Typography>
                 </Grid>
