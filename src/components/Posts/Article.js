@@ -55,9 +55,8 @@ const body = {
 };
 
 const icon = {
-  opacity: "20%",
+  opacity: "40%",
   width: "70px",
-  
 };
 
 const date = {
@@ -97,7 +96,7 @@ class Article extends Component {
   }
   async handleClap()
   {
-    if(this.props.isLogged==false)
+    if(this.props.isLogged===false)
     {
       alert("Please login");
     }
@@ -306,7 +305,7 @@ class Article extends Component {
                 </p>
               </Grid>
               <Grid item alignItems="flex-start" lg={10} className="clap">
-              <img src={clapicon}  alt="Claps:" onClick={this.handleClap} style={icon} className="clap" />
+              <img src={clapicon}  alt="Claps:" onClick={this.handleClap} style={icon} />
                 {this.state.claps}
               </Grid>
             </Grid>
