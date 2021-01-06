@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/medfrontend/static/css/main.304512b3.chunk.css",
-    "main.js": "/medfrontend/static/js/main.e994a9d8.chunk.js",
-    "main.js.map": "/medfrontend/static/js/main.e994a9d8.chunk.js.map",
+    "main.css": "/medfrontend/static/css/main.4e2090b5.chunk.css",
+    "main.js": "/medfrontend/static/js/main.ef47a077.chunk.js",
+    "main.js.map": "/medfrontend/static/js/main.ef47a077.chunk.js.map",
     "runtime-main.js": "/medfrontend/static/js/runtime-main.27ec61dc.js",
     "runtime-main.js.map": "/medfrontend/static/js/runtime-main.27ec61dc.js.map",
     "static/css/2.e9c7467b.chunk.css": "/medfrontend/static/css/2.e9c7467b.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.5534eae0.chunk.js.map": "/medfrontend/static/js/2.5534eae0.chunk.js.map",
     "index.html": "/medfrontend/index.html",
     "static/css/2.e9c7467b.chunk.css.map": "/medfrontend/static/css/2.e9c7467b.chunk.css.map",
-    "static/css/main.304512b3.chunk.css.map": "/medfrontend/static/css/main.304512b3.chunk.css.map",
+    "static/css/main.4e2090b5.chunk.css.map": "/medfrontend/static/css/main.4e2090b5.chunk.css.map",
     "static/js/2.5534eae0.chunk.js.LICENSE.txt": "/medfrontend/static/js/2.5534eae0.chunk.js.LICENSE.txt",
     "static/media/bootstrap.min.css": "/medfrontend/static/media/glyphicons-halflings-regular.be810be3.woff2"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.27ec61dc.js",
     "static/css/2.e9c7467b.chunk.css",
     "static/js/2.5534eae0.chunk.js",
-    "static/css/main.304512b3.chunk.css",
-    "static/js/main.e994a9d8.chunk.js"
+    "static/css/main.4e2090b5.chunk.css",
+    "static/js/main.ef47a077.chunk.js"
   ]
 }
