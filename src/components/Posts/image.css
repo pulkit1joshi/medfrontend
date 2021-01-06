@@ -4,3 +4,11 @@
     align-items: center;
     align-self: center;
     }
+
+.clap {
+    opacity: 100%;
+}
+
+.clap:hover {
+    opacity: 50%
+}

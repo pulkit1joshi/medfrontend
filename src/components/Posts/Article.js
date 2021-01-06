@@ -57,6 +57,7 @@ const body = {
 const icon = {
   opacity: "20%",
   width: "70px",
+  
 };
 
 const date = {
@@ -91,6 +92,62 @@ class Article extends Component {
       claped: false,
     };
     this.getData();
+    this.handleClap = this.handleClap.bind(this);
+    this.updateClaps = this.updateClaps.bind(this);
+  }
+  async handleClap()
+  {
+    if(this.props.isLogged==false)
+    {
+      alert("Please login");
+    }
+    else
+    {
+      const token = sessionStorage.getItem("medtoken");
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": token,
+      };
+  
+      await axios
+        .post(
+          REACT_APP_base_url+"/api/article/clap/" + this.props.match.params.id, null,
+          {
+            headers: headers,
+          }
+        )
+  
+        .then((response) => {
+          if(response.data.error)
+          {
+            console.log(response);
+            return this.setState({errortext: response.data.msg});
+          } else {
+            console.log(response);
+            this.setState({ succtext: "Updated", errortext: "" });
+            this.updateClaps();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  async updateClaps()
+  {
+    const token = sessionStorage.getItem("medtoken");
+      const headers = {
+        "Content-Type": "application/json",
+        "auth-token": token,
+      };
+    await axios
+      .get(REACT_APP_base_url + "/api/article/getclaps/" + this.props.match.params.id, {
+        headers: headers,
+      })
+      .then((response) => {
+        this.setState({claps: response.data.claps});
+      });
   }
 
   async getData() {
@@ -141,7 +198,7 @@ class Article extends Component {
           writerid: response.data.article.writerid,
           image: response.data.prof.image,
           //taglist: response.data.article.tagslist,
-          claps: response.data.article.claps,
+          claps: response.data.article.clapersIds.length,
           pname: pname,
           pid: pid,
           plink: plink,
@@ -248,8 +305,8 @@ class Article extends Component {
                   <hr />
                 </p>
               </Grid>
-              <Grid item alignItems="flex-start" lg={10}>
-                <img src={clapicon} alt="Claps:" style={icon} />
+              <Grid item alignItems="flex-start" lg={10} className="clap">
+              <img src={clapicon}  alt="Claps:" onClick={this.handleClap} style={icon} className="clap" />
                 {this.state.claps}
               </Grid>
             </Grid>
@@ -278,11 +335,16 @@ class Article extends Component {
 
         <Grid container>
           <Grid item lg={4} md={4} xs={4}></Grid>
-          <Grid item xs={6} md={6} lg={6} 
+          <Grid item xs={2} md={2} lg={1} 
+          direction="row"
             justify="center"
-            alignItems="center">
-            <img src={clapicon} alt="Claps" style={icon} fluid></img> {this.state.claps}
+            alignItems="center"
+            className="clap"
+            spacing={0}
+            stype={{padding: 0, margin: 0}}>
+            <img src={clapicon} alt="Claps" onClick={this.handleClap} style={icon}  fluid></img>{this.state.claps}
           </Grid>
+         
         </Grid>
 
         <hr />
