@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/medfrontend/static/css/main.94f0c187.chunk.css",
-    "main.js": "/medfrontend/static/js/main.047e5373.chunk.js",
-    "main.js.map": "/medfrontend/static/js/main.047e5373.chunk.js.map",
+    "main.css": "/medfrontend/static/css/main.304512b3.chunk.css",
+    "main.js": "/medfrontend/static/js/main.a30dafec.chunk.js",
+    "main.js.map": "/medfrontend/static/js/main.a30dafec.chunk.js.map",
     "runtime-main.js": "/medfrontend/static/js/runtime-main.27ec61dc.js",
     "runtime-main.js.map": "/medfrontend/static/js/runtime-main.27ec61dc.js.map",
     "static/css/2.e9c7467b.chunk.css": "/medfrontend/static/css/2.e9c7467b.chunk.css",
-    "static/js/2.30d81120.chunk.js": "/medfrontend/static/js/2.30d81120.chunk.js",
-    "static/js/2.30d81120.chunk.js.map": "/medfrontend/static/js/2.30d81120.chunk.js.map",
+    "static/js/2.5534eae0.chunk.js": "/medfrontend/static/js/2.5534eae0.chunk.js",
+    "static/js/2.5534eae0.chunk.js.map": "/medfrontend/static/js/2.5534eae0.chunk.js.map",
     "index.html": "/medfrontend/index.html",
     "static/css/2.e9c7467b.chunk.css.map": "/medfrontend/static/css/2.e9c7467b.chunk.css.map",
-    "static/css/main.94f0c187.chunk.css.map": "/medfrontend/static/css/main.94f0c187.chunk.css.map",
-    "static/js/2.30d81120.chunk.js.LICENSE.txt": "/medfrontend/static/js/2.30d81120.chunk.js.LICENSE.txt",
+    "static/css/main.304512b3.chunk.css.map": "/medfrontend/static/css/main.304512b3.chunk.css.map",
+    "static/js/2.5534eae0.chunk.js.LICENSE.txt": "/medfrontend/static/js/2.5534eae0.chunk.js.LICENSE.txt",
     "static/media/bootstrap.min.css": "/medfrontend/static/media/glyphicons-halflings-regular.be810be3.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.27ec61dc.js",
     "static/css/2.e9c7467b.chunk.css",
-    "static/js/2.30d81120.chunk.js",
-    "static/css/main.94f0c187.chunk.css",
-    "static/js/main.047e5373.chunk.js"
+    "static/js/2.5534eae0.chunk.js",
+    "static/css/main.304512b3.chunk.css",
+    "static/js/main.a30dafec.chunk.js"
   ]
 }
